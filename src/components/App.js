@@ -176,7 +176,7 @@ function handleCity(e){
 	<div id="main">
 		<form  > 
 				<label >State:</label>
-				<select onChange={(e)=>{handleState(e)}} >
+				<select onChange={(e)=>{handleState(e)}}  id="state" >
 					<option value="select">Select</option>
 					{
 						states.map((state,index)=>(
@@ -187,21 +187,21 @@ function handleCity(e){
 					}
 				</select>
 			<label >City:</label>
-			<select onChange={(e)=>{handleCity(e)}}  >
+			<select onChange={(e)=>{handleCity(e)}} id="city"   >
 				<option value="select">Select</option>
 				{
 					cities.map((city,index)=>(
-						<option value="" key={index} >{city.name}</option>
+						<option value={city.name} key={index}  >{city.name}</option>
 					))
 				}
 
 			</select>
 			<label >Landmark:</label>
-			<select>
+			<select id="landmark"  >
 				<option value="">Select</option>
 				{
 					landmark.map((land,index)=>(
-						<option value="" key={index} >{land.name}</option>
+						<option value={land.name} key={index}  >{land.name}</option>
 					))
 				}
 			</select>
