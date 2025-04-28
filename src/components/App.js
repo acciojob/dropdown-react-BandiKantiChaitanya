@@ -1,4 +1,4 @@
-import React, { useState,useReducer } from "react";
+import React, { useState } from "react";
 import "./../styles/App.css";
 
 
@@ -138,12 +138,75 @@ const states = [{
 }];
 
 
+
 function App() 
 {
+
+let [stateName,setStateName]=useState('')
+let [cities,setCities]=useState([])
+let [landmark,setLandmark]=useState([])
+
+
+// console.log(states[0].city[1].landmarks[1].name)
+// console.log(states)
+function handleState(e){
+	// console.log(e.target.selectedIndex)
+	// console.log(e.target.value)
+	let selectedStateName =e.target.value
+	setStateName(selectedStateName )
+
+	let selectedState=states.find((state)=>state.name===selectedStateName)
+	setCities(selectedState?selectedState.city:[])
+}
+
+
+function handleCity(e){
+	let cityName=e.target.selectedIndex-1
+	// console.log(cityName)
+	// let selectedCity=cities.find((city)=>city.name===cityName)
+	let selectedCity=cities[cityName]
+	setLandmark(selectedCity.landmarks?selectedCity.landmarks:[])
+	// console.log(selectedCity.landmarks)
+
+}
+
+
 	// Do not alter/remove main div
 	return (
 	<div id="main">
-		
+		<form  > 
+				<label >State:</label>
+				<select onChange={(e)=>{handleState(e)}} >
+					<option value="select">Select</option>
+					{
+						states.map((state,index)=>(
+							
+								<option value={state.name} key={index} >{state.name}</option>
+							
+						))
+					}
+				</select>
+			<label >City:</label>
+			<select onChange={(e)=>{handleCity(e)}}  >
+				<option value="select">Select</option>
+				{
+					cities.map((city,index)=>(
+						<option value="" key={index} >{city.name}</option>
+					))
+				}
+
+			</select>
+			<label >Landmark:</label>
+			<select>
+				<option value="">Select</option>
+				{
+					landmark.map((land,index)=>(
+						<option value="" key={index} >{land.name}</option>
+					))
+				}
+			</select>
+
+		</form>
 	</div>
 	);
 }
